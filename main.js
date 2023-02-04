@@ -1,6 +1,9 @@
+/*global console, $, document*/
+/*eslint-disable no-console*/
+
 const api = {
-    key: '5e943be28d5f77d502c6633770b389b9',
-    baseurl: 'https://api.openweathermap.org/data/2.5/'
+    key: "5e943be28d5f77d502c6633770b389b9",
+    baseurl: "https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=5e943be28d5f77d502c6633770b389b9"
 }
 
 const searchbox = document.querySelector('.search-box');
@@ -32,7 +35,7 @@ function displayResults (weather) {
     let temp = document.querySelector('.current .temp');
     temp.innerHTML = `${Math.round(weather.main.temp)}<span>°F</span>`
 
-    let weather_el = document.querySelector(.current .weather);
+    let weather_el = document.querySelector('.current .weather');
     weather.el.innerText = weather.weather[0].main;
     let hilow = document.querySelector('hilow');
     hilow.innerText = `${Math.round(weather.main.temp_min)}°F / ${Math.round(weather.main.temp_max)}°F`;
