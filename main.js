@@ -1,34 +1,29 @@
-/*global console, $, document*/
-/*eslint-disable no-console*/
-
 const api = {
     key: "5e943be28d5f77d502c6633770b389b9",
-    baseurl: "https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=5e943be28d5f77d502c6633770b389b9"
+    baseurl: "http://api.openweathermap.org/data/2.5/"
 }
 
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery)
 
 function setQuery(evt) {
-    if (evt.keycode == 13) {
-    getResults(searchbox.value)
+    if (evt.keyCode == 13) {
+    getResults(searchbox.value);
     }
 }
 
 function getResults(query) {
-    fetch(`${api.base}weather?q=${query}&units=imperial&APPID=${api.key}`)
+    fetch(`${api.baseurl}weather?q=${query}&units=imperial&APPID=${api.key}`)
         .then(weather => {
             return weather.json();
         }).then(displayResults);
 }
 
 function displayResults (weather) {
-    console.log(weather);
     let city = document.querySelector('.location .city');
     city.innerText = `${weather.name}, ${weather.sys.country}`;
 
     let now = new Date()
-
     let date = document.querySelector('.location .date');
     date.innerText = dateBuilder(now);
 
@@ -36,7 +31,8 @@ function displayResults (weather) {
     temp.innerHTML = `${Math.round(weather.main.temp)}<span>°F</span>`
 
     let weather_el = document.querySelector('.current .weather');
-    weather.el.innerText = weather.weather[0].main;
+    weather_el.innerText = weather.weather[0].main;
+
     let hilow = document.querySelector('hilow');
     hilow.innerText = `${Math.round(weather.main.temp_min)}°F / ${Math.round(weather.main.temp_max)}°F`;
 }
