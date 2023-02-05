@@ -1,24 +1,26 @@
+//Initialize the api
 const api = {
     key: "5e943be28d5f77d502c6633770b389b9",
     baseurl: "http://api.openweathermap.org/data/2.5/"
 }
 
+//add EventListener to searchbox to listen for a key to be pressed
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery)
-
+//If user presses keyCode 13(enter key), run getResults() w/ the value as the argument
 function setQuery(evt) {
     if (evt.keyCode == 13) {
     getResults(searchbox.value);
     }
 }
-
+//fetch the url and key from the API at the top,THEN return the data, THEN display it
 function getResults(query) {
     fetch(`${api.baseurl}weather?q=${query}&units=imperial&APPID=${api.key}`)
         .then(weather => {
             return weather.json();
         }).then(displayResults);
 }
-
+//Attaches city to city, autocompletes country, updates date, temp, weather, and high/low temp
 function displayResults (weather) {
     let city = document.querySelector('.location .city');
     city.innerText = `${weather.name}, ${weather.sys.country}`;
